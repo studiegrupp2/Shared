@@ -10,3 +10,4 @@
 /Users/isakgunnardo/Ecutbildning/backend1/Gruppuppgift/Shared/obj/Debug/net8.0/refint/Shared.dll
 /Users/isakgunnardo/Ecutbildning/backend1/Gruppuppgift/Shared/obj/Debug/net8.0/Shared.pdb
 /Users/isakgunnardo/Ecutbildning/backend1/Gruppuppgift/Shared/obj/Debug/net8.0/ref/Shared.dll
+/Users/isakgunnardo/Ecutbildning/backend1/Gruppuppgift/Shared/obj/Debug/net8.0/Shared.csproj.AssemblyReference.cache
