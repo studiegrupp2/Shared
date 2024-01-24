@@ -5,8 +5,8 @@ namespace Shared;
 
 public interface IConnection
 {
-    void Send(Message message);
-    List<Message> Receive();
+    void Send(Command command);
+    List<Command> Receive();
 }
 
 public class SocketConnection : IConnection
@@ -30,9 +30,9 @@ public class SocketConnection : IConnection
         return new SocketConnection(socket);
     }
 
-    public List<Message> Receive()
+    public List<Command> Receive()
     {
-        List<Message> messages = new List<Message>();
+        List<Command> commands = new List<Command>();
         if (this.socket.Available != 0)
         {
             byte[] buffer = new byte[1024];
@@ -48,21 +48,29 @@ public class SocketConnection : IConnection
 
                 if (stringId == "10")
                 {
-                    messages.Add(RegisterUserMessage.Decode(message));
+                    commands.Add(RegisterUserCommand.Decode(message));
                 }
                 else if (stringId == "11")
                 {
-                    messages.Add(LoginMessage.Decode(message));
+                    commands.Add(LoginCommand.Decode(message));
+                }
+                else if (stringId == "12")
+                {
+                    commands.Add(SendMessageCommand.Decode(message));
+                }
+                else if (stringId == "13")
+                {
+                    commands.Add(SendPrivateMessageCommand.Decode(message));
                 }
             }
         }
 
-        return messages;
+        return commands;
     }
 
-    public void Send(Message message)
+    public void Send(Command commands)
     {
-        string toSend = message.Id() + message.Encode() + "|";
+        string toSend = commands.Id() + commands.Encode() + "|";
         byte[] buffer = System.Text.Encoding.UTF8.GetBytes(toSend);
         socket.Send(buffer);
     }
