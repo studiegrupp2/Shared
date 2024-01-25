@@ -7,15 +7,28 @@ public interface IConnection
 {
     void Send(Command command);
     List<Command> Receive();
+
+    User? GetUser();
+    void SetUser(User user);
 }
 
 public class SocketConnection : IConnection
 {
     private Socket socket;
+    private User? user;
 
     public SocketConnection(Socket socket)
     {
         this.socket = socket;
+        this.user = null;
+    }
+
+    public User? GetUser() {
+        return this.user;
+    }
+
+    public void SetUser(User user) {
+        this.user = user;
     }
 
     public static SocketConnection Connect(byte[] ip, int port)
