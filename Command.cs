@@ -66,29 +66,55 @@ public class LoginCommand : Command
     }
 }
 
-public class SendMessageCommand : Command
-{
-    public string Content { get; set; }
+// public class SendMessageCommand : Command
+// {
+//     public string Content { get; set; }
     
-    public SendMessageCommand(string content)
+//     public SendMessageCommand(string content)
+//     {
+//         this.Content = content;
+//     }
+
+//     public override string Encode()
+//     {
+//         return $"{this.Content}";
+//     }
+//     public static Command Decode(string message)
+//     {
+//         return new SendMessageCommand(message);
+//     }
+    
+//     public override int Id()
+//     {
+//         return 12;
+//     }
+// }
+public class SendMessageCommand : Command //test SendMessageCommand
+{
+    public string Sender { get; set; }
+    public string Content { get; set; }
+
+       public SendMessageCommand(string sender, string content)
     {
+        this.Sender = sender;
         this.Content = content;
     }
 
     public override string Encode()
     {
-        return $"{this.Content}";
+        return $"{this.Sender}:{this.Content}";
     }
     public static Command Decode(string message)
     {
-        return new SendMessageCommand(message);
+        string[] split = message.Split(":");
+        return new SendMessageCommand(split[0], split[1]);
     }
-    
     public override int Id()
     {
         return 12;
     }
 }
+
 public class SendPrivateMessageCommand : Command
 {
     public string Sender { get; set; }
