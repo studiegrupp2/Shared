@@ -23,11 +23,13 @@ public class SocketConnection : IConnection
         this.user = null;
     }
 
-    public User? GetUser() {
+    public User? GetUser()
+    {
         return this.user;
     }
 
-    public void SetUser(User user) {
+    public void SetUser(User user)
+    {
         this.user = user;
     }
 
@@ -74,6 +76,14 @@ public class SocketConnection : IConnection
                 else if (stringId == "13")
                 {
                     commands.Add(SendPrivateMessageCommand.Decode(message));
+                }
+                else if (stringId == "14")
+                {
+                    commands.Add(LogoutCommand.Decode(message));
+                }
+                else if (stringId == "15")
+                {
+                    commands.Add(DisconnectCommand.Decode(message));
                 }
             }
         }
