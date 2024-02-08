@@ -155,7 +155,6 @@ public class DisconnectCommand : Command
     }
     public static Command Decode(string message)
     {
-
         return new DisconnectCommand();
     }
 

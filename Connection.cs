@@ -87,7 +87,6 @@ public class SocketConnection : IConnection
                 }
             }
         }
-
         return commands;
     }
 
